@@ -29,6 +29,16 @@ This project was developed as part of my **CodeAlpha Internship Task 1**. 🚀
 
 ---
 
+📌 Note for Others Using This Project
+
+You must set up your own PostgreSQL database and email credentials in the .env file.
+
+API keys, DB passwords, and sensitive credentials are not shared in this repo for security reasons.
+
+Without proper .env configuration, the project will not run successfully.
+
+---
+
 ## 🚀 Getting Started  
 
 Follow these steps to run the project locally:
@@ -42,15 +52,6 @@ npm i
 nodemon index.js
 
 ---
-📌 Note for Others Using This Project
-
-You must set up your own PostgreSQL database and email credentials in the .env file.
-
-API keys, DB passwords, and sensitive credentials are not shared in this repo for security reasons.
-
-Without proper .env configuration, the project will not run successfully.
-
----
-📬 Contact
+##📬 Contact
 
 👩‍💻 Developed by Farwa Khalid
