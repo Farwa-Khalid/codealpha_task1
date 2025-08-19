@@ -21,7 +21,7 @@ app.set("view engine", "ejs");
 
 app.use(session(
   {
-    secret:"TOPSECRETWORD",
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized:true,
     cookie:{
@@ -38,7 +38,7 @@ const db = new pg.Client({
   host: process.env.DB_HOST,
   database:process.env.DB_NAME ,
   password: process.env.DB_PASS,
-  port: process.env.DB_PORT,
+  port: process.env.PORT,
 });
 db.connect();
 
