@@ -1,0 +1,45 @@
+<!-- partials/footer.ejs -->
+ <head>
+    <link rel="stylesheet" href="assets/css/footer.css">
+ </head>
+<footer>
+    <div class="foot-panel1" id="backtotop">Back To Top</div>
+    <div class="foot-panel2">
+        <ul>
+        <p>Get To Know Us</p>
+        <a href="/about">About Us</a>
+        <a href="/careers">Careers</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact Us</a>
+        <a href="/mission">Our Mission</a>
+        </ul>
+    </div>
+    <div class="foot-panel3">
+        <div class="logo"></div>
+    </div>
+    <div class="foot-panel4">
+        <div class="pages">
+            <a>Conditions of use</a>
+            <a>Privacy Notice</a>
+            <a>Your Ads Privacy Choices</a>
+        </div>
+        <div class="copyright">
+        TheEssentialsShop.com, Inc. or its affiliates
+        </div>
+    </div>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const backToTop = document.getElementById("backtotop");
+
+  if (backToTop) {
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth" // Smooth scrolling effect
+      });
+    });
+  }
+});
+
+</script>

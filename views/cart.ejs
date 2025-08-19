@@ -1,0 +1,50 @@
+<%- include('partials/header') %>
+
+<div class="cart-container">
+    <h2>Your Cart</h2>
+
+    <% if (cart && cart.length > 0) { %>
+    <div class="cart-items">
+        <% cart.forEach(item => { %>
+        <div class="cart-item-card">
+            <div class="item-image">
+                <% if (item.image_url) { %>
+                <img src="<%= item.image_url %>" alt="<%= item.name %>" class="cart-item-image">
+                <% } %>
+            </div>
+            <div class="item-details">
+                <h3><%= item.name %></h3>
+                <p class="item-price">$ <%= parseFloat(item.price).toFixed(2) %></p>
+                <div class="quantity-controls">
+                    <form action="/cart/decrement/<%= item.id%>" method="POST" class="quantity-form">
+                        <button type="submit" class="quantity-btn">-</button>
+                    </form>
+                    <span class="quantity-value"><%= item.quantity %></span>
+                    <form action="/cart/increment/<%= item.id %>" method="POST" class="quantity-form">
+                        <button type="submit" class="quantity-btn">+</button>
+                    </form>
+                    <form action="/cart/remove/<%= item.id %>" method="POST" class="delete-form">
+                        <button type="submit" class="delete-btn"><i class="fas fa-trash-alt"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+    
+    <div class="cart-summary">
+        <div class="subtotal-row">
+            <span>Subtotal:</span>
+            <span>$ <%= totalPrice.toFixed(2) %></span>
+        </div>
+<a href="/checkout" class="btn checkout-btn">CHECKOUT</a>
+<button onclick="window.location.href='/store'" class="btn continue-btn">CONTINUE SHOPPING</button>
+</div>
+
+
+    <% } else { %>
+    <p>Your cart is empty.</p>
+    <% } %>
+</div>
+
+<%- include('partials/footer') %>

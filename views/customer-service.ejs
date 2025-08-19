@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+<head>
+  <link rel="stylesheet" href="/assets/css/navbar.css">
+  <link rel="stylesheet" href="/assets/css/faq.css">
+  <link rel="stylesheet" href="/assets/css/footer.css">
+  <link rel="stylesheet" href="/assets/css/global.css">
+</head>
+<div class="faq-header-box">
+    Customer Service - Frequently Asked Questions
+</div>
+
+<section class="faq-section">
+    <div class="faq-container">
+        <% faqs.forEach(faq => { %>
+            <div class="faq-card">
+                <h3><%= faq.question %></h3>
+                <p><%= faq.answer %></p>
+            </div>
+        <% }) %>
+    </div>
+</section>
+
+<%- include('partials/footer') %>

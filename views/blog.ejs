@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="/css/gettoknow.css">
+<link rel="stylesheet" href="/css/blog.css">
+
+<div class="page-section">
+    <h1>Blog</h1>
+    <p>Read our latest tips, trends, and updates!</p>
+
+    <div class="blog-post">
+        <h3 class="blog-title">Top 5 Must-Have Gadgets in 2025</h3>
+        <p class="blog-summary">Discover the coolest tech products you will want in your home...</p>
+        <div class="blog-content">
+            <p>Here is the full article about gadgets in 2025. We cover smart home devices, AI-powered appliances, eco-friendly gadgets, and more...</p>
+        </div>
+    </div>
+
+    <div class="blog-post">
+        <h3 class="blog-title">How to Choose the Perfect Gift</h3>
+        <p class="blog-summary">Tips and tricks to make gift shopping stress-free...</p>
+        <div class="blog-content">
+            <p>Choosing the perfect gift involves knowing the recipient’s preferences, setting a budget, and personalizing your choice. We share step-by-step tips and examples...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const titles = document.querySelectorAll(".blog-title");
+
+        titles.forEach(title => {
+            title.addEventListener("click", () => {
+                const content = title.nextElementSibling.nextElementSibling;
+                content.style.display = (content.style.display === "block") ? "none" : "block";
+            });
+        });
+    });
+</script>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+<head>
+  <link rel="stylesheet" href="/assets/css/navbar.css">
+  <link rel="stylesheet" href="/assets/css/product.css">
+  <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
+</head>
+
+<h2 class="page-title"><%= category ? category.name : 'Products' %></h2>
+
+<div class="product-grid">
+  <% if (products.length === 0) { %>
+    <p>No products found in this category.</p>
+  <% } %>
+
+  <% products.forEach(product => { %>
+    <div class="product-card">
+      <img src="<%= product.image_url %>" alt="<%= product.name %>">
+      
+      <div class="product-content">
+        <h3><%= product.name %></h3>
+        <p class="desc"><%= product.description %></p>
+        <p class="price">$<%= (product.price || 0).toFixed(2) %></p>
+      </div>
+      
+      <button 
+        type="button" 
+        class="btn add-to-cart" 
+        data-id="<%= product.id %>">
+        Add to Cart
+      </button>
+    </div>
+  <% }) %>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".add-to-cart").forEach(btn => {
+      btn.addEventListener("click", async () => {
+         console.log("Add to Cart clicked for product", btn.dataset.id);
+        const productId = btn.dataset.id;
+
+        // Add product to cart
+        await fetch(`/cart/add/${productId}`, { 
+          method: "POST",
+          credentials: "same-origin" 
+        });
+
+        // Get updated count
+        const countRes = await fetch("/cart/count", {
+          credentials: "same-origin"
+        });
+        const { cartCount } = await countRes.json();
+        document.getElementById("cartCount").textContent = cartCount;
+      });
+    });
+  });
+</script>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,206 @@
+
+  <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/assets/css/navbar.css">
+  <link rel="stylesheet" href="/assets/css/product.css">
+  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="/assets/css/cart.css">
+  <link rel="stylesheet" href="/assets/css/footer.css">
+  <link rel="stylesheet" href="/assets/css/gettoknow.css">
+ <link rel="stylesheet" href="/assets/css/checkout.css">
+  <link rel="stylesheet" href="/assets/css/success.css">
+
+</head>
+<header>
+    <div class="navbar">
+        <div class="nav_logo border">
+            <div class="logo"></div>
+        </div>
+        <div class="Nav Adress border">
+            <p class="Add1">Deliever to</p>
+            <div class="add-icon">
+                <i class="fa-solid fa-location-dot"></i>
+                <p class="add2">World Wide</p>
+            </div>
+        </div>
+        <div class="Nav-search">
+            <select class="search_select">
+                <option>All</option>
+            </select>
+            <input placeholder="Search Anything.." class="search-input" id="searchBox">
+            <div class="Search-Icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        </div>
+      
+<a href="/cart" class="Nav-cart border">
+<i class="fa-solid fa-cart-shopping"></i>
+ Cart (<span id="cartCount"><%= cartCount || 0 %></span>)
+</a>
+
+    </div>
+
+    <div class="Panel">
+        <div class="Panel-all">
+            <i class="fa fa-arrow-left" id="backBtn"></i>
+        </div>
+        <div class="Panel-ops">
+            <p id="newArrivalsLink">New Arrivals</p>
+            <p  id="categoriesLink">Categories</p> 
+            <p>Customer Service</p>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="product-grid" id="productGrid"></div>
+</main>
+
+<script>
+
+// JS for arrow button handling
+document.getElementById("backBtn").addEventListener("click", function() {
+    // Get current page path
+    const currentPath = window.location.pathname;
+
+    if (currentPath === "/" || currentPath === "/store" || 
+        currentPath === "/customer-service" || currentPath === "/explore" ||
+        currentPath === "/categories/1" || currentPath === "/categories/2" ||
+         currentPath === "/categories/3" || currentPath === "/categories/4" ||
+        currentPath === "/categories/5" ||  currentPath === "/categories/6" ||
+        currentPath === "/categories/7" || currentPath === "/categories/8" || currentPath ==="/cart"
+    || currentPath === "/newArrivals" || currentPath === "/about" || currentPath === "/mission"
+|| currentPath === "/careers" || currentPath === "/blog" || currentPath === "/contact"|| currentPath ==="/cart" ) {
+        // If homepage → go to login route
+        window.location.href = "/store";
+    } 
+    else if(currentPath === "/checkout"){
+         window.location.href = "/cart";
+    }else {
+        // Otherwise → go to homepage route
+        window.location.href = "/";
+    }
+});
+
+
+//js for live search frontend part
+document.getElementById('searchBox').addEventListener('input', function () {
+    let query = this.value.trim();
+
+    fetch(`/search?query=${encodeURIComponent(query)}`)
+        .then(res => res.json())
+        .then(data => {
+            let grid = document.getElementById('productGrid');
+            grid.style.display = 'grid'; 
+            grid.innerHTML = ''; // clear previous results
+            
+            // Create HTML for each product
+    data.forEach(product => {
+    grid.innerHTML += `
+        <div class="product-card">
+            <img src="${product.image_url}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <div class="price">$ ${product.price}</div>
+            <div class="desc"> ${product.description}</div>
+            <button class="btn add-to-cart" data-id="${product.id}">Add to Cart</button>
+        </div>
+    `;
+});
+        })
+        .catch(err => console.error(err));
+});
+
+//js part for new arrivals frontend
+document.getElementById("newArrivalsLink").addEventListener("click", () => {
+    window.location.href = "/newArrivals";
+    
+});
+
+// Add this **once**, outside your fetch
+document.getElementById("productGrid").addEventListener("click", async (e) => {
+    if (e.target.classList.contains("add-to-cart")) {
+        const productId = e.target.dataset.id;
+
+        try {
+            const res = await fetch(`/cart/add/${productId}`, {
+                method: "POST",
+                credentials: "same-origin",
+                headers: { "Content-Type": "application/json" }
+            });
+
+            if (!res.ok) throw new Error("Failed to add to cart");
+
+            const { cartCount } = await res.json();
+            document.getElementById("cartCount").textContent = cartCount;
+
+           
+        } catch (err) {
+            console.error(err);
+            alert("Something went wrong!");
+        }
+    }
+});
+
+//js part for categoriies frontend
+document.querySelector(".Panel-ops p:nth-child(2)").addEventListener("click", function () {
+    fetch("/categories")
+        .then(res => res.json())
+        .then(data => {
+            let grid = document.getElementById('productGrid');
+            grid.style.display='grid';
+            grid.innerHTML = '';
+
+            data.forEach(cat => {
+                let card = document.createElement("div");
+                card.className = "category-card";
+                card.innerHTML = `
+                    <h3>${cat.name}</h3>
+                    <p>${cat.description || ''}</p>
+                `;
+                // When clicking a category, fetch its products
+                card.addEventListener("click", () => {
+                    fetch(`/categories/${cat.id}/products`)
+                        .then(res => res.json())
+                        .then(products => {
+                            grid.innerHTML = '';
+                            products.forEach(product => {
+    grid.innerHTML += `
+        <div class="product-card">
+            <img src="${product.image_url}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <div class="price">$ ${product.price}</div>
+            <div class="desc">${product.description}</div>
+            <button class="btn add-to-cart" data-id="${product.id}">Add to Cart</button>
+        </div>
+    `;
+});
+                  })
+                        .catch(err => console.error(err));
+                });
+
+                grid.appendChild(card);
+            });
+        })
+        .catch(err => console.error(err));
+});
+
+
+//js part for faqs frontend
+document.querySelector(".Panel-ops p:nth-child(3)").addEventListener("click", function () {
+    window.location.href = "/customer-service";
+});
+
+//js part for cart count frontend
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const res = await fetch("/cart/count", { credentials: "same-origin" });
+    if (!res.ok) throw new Error("Failed to fetch cart count");
+    const { cartCount } = await res.json();
+    document.getElementById("cartCount").textContent = cartCount;
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+
+
+</script>

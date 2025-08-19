@@ -1,0 +1,155 @@
+.navbar {
+    height: 60px;
+    background-color: #0F1111;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.nav_logo {
+    height: 50px;
+    width: 100px;
+}
+
+.logo {
+    background-image: url("/assets/Images/logo2.png");
+    background-size: cover;
+    height: 50px;
+    width: 100%;
+    background-color: #222f3d;
+}
+
+.Add1 {
+    color: #cccccc;
+    font-size: 0.85rem;
+    margin-left: 15px;
+}
+
+.add2 {
+    font-size: 1rem;
+    margin-left: 3px;
+}
+
+.add-icon {
+    display: flex;
+    align-items: center;
+}
+
+.Nav-search {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: pink;
+    width: 620px;
+    height: 40px;
+    border-radius: 4px;
+}
+
+.search_select {
+    background-color: #f3f3f3;
+    width: 50px;
+    text-align: center;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border: none;
+}
+
+.search-input {
+    width: 100%;
+    font-size: 1rem;
+    border: none;
+}
+
+.Search-Icon {
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    background-color: #febd68;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    color: #0F1111;
+}
+.back-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;          /* circle size */
+    height: 40px;         /* circle size */
+    background-color: #333; /* background color */
+    color: white;         /* arrow color */
+    font-size: 18px;      /* arrow size */
+    cursor: pointer;
+    transition: 0.2s ease;
+
+}
+.back-arrow:hover {
+    background-color: #666565; /* darker on hover */
+    transform: scale(1.05); /* slight zoom */
+}
+span {
+    font-size: 0.7rem;
+}
+
+.nav2 {
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.Nav-search:hover {
+    border: 2px solid #febd68;
+}
+
+.Nav-cart {
+  display: flex; 
+  align-items: center; 
+  text-decoration: none; 
+  color: white; 
+  font-size: 1rem;
+  padding: 0 10px;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out; 
+}
+
+.Nav-cart .fa-cart-shopping {
+  font-size: 2rem; 
+}
+
+.Nav-cart:hover {
+  color: #febd68;
+}
+
+
+.border {
+  border: 1.5px solid black; 
+  border-radius: 2px;
+}
+
+.border:hover {
+  border: 1.5px solid white; 
+}
+
+.Panel {
+    height: 40px;
+    background-color: #222f3d;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.Panel-ops p {
+    display: inline;
+    margin-left: 15px;
+}
+
+.Panel-ops {
+    width: 70%;
+    font-size: 0.85rem;
+}
+
+.panel-deals {
+    font-size: 0.9rem;
+    font-weight: 700;
+}

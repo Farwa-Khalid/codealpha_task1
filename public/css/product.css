@@ -1,0 +1,100 @@
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px; /* Optional: Sets a max width for the grid */
+  margin: 0 auto; /* Optional: Centers the grid on the page */
+}
+
+/* Individual card for each product */
+.product-card {
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  height: auto; 
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+.product-card .image-container {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.product-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  display: block; 
+}
+
+.product-card h3 {
+  margin: 10px 0 6px;
+  font-size: 1.05rem;
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; */
+}
+
+.product-card .desc {
+  color: #333;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-height: 1.5em;
+  max-height: 4.5em;
+}
+
+/* Product price */
+.product-card .price {
+  font-weight: 700;
+  color: #007185;
+  margin-bottom: 10px;
+}
+
+/* Add to cart button */
+.product-card .btn {
+  background: #ff6a00;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.page-title{
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-weight: bolder;
+  font-style: italic;
+  border: 2px solid #ff6a00;
+  
+}
+
+.category-card{
+  background:#222f3d;
+  color: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  height: auto;
+}

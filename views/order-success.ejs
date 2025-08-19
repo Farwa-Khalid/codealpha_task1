@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+
+<div class="success-container">
+    <div class="success-box">
+        <div class="processing-animation" id="order-status">
+            <div class="processing-circle">
+                <span class="processing-text">Processing...</span>
+            </div>
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark__path" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+        </div>
+        <h2>Thank You for Your Order!</h2>
+        <p>Your order has been placed successfully. We will notify you when it ships.</p>
+        <a href="/store" class="btn btn-primary">Continue Shopping</a>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
+
+<script>
+    // This small script simulates the "processing" to "tick" animation.
+    // In a real application, you might use a server response to trigger this.
+    document.addEventListener("DOMContentLoaded", function() {
+        const orderStatus = document.getElementById('order-status');
+        setTimeout(() => {
+            orderStatus.classList.add('complete');
+        }, 2000); // Wait 2 seconds before showing the tick mark
+    });
+</script>

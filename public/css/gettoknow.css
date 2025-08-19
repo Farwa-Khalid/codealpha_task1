@@ -1,0 +1,135 @@
+/* Page background */
+body {
+    background-color: #efeced;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Section container (the centered box) */
+.page-section {
+    background-color: #ffffff;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Headings */
+.page-section h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.page-section h3 {
+    margin-top: 20px;
+    color: #444;
+}
+
+/* Paragraphs */
+.page-section p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Blog post style */
+.blog-post {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+/* Lists */
+.page-section ul {
+    padding-left: 20px;
+}
+
+.page-section li {
+    margin-bottom: 8px;
+}
+
+/* Links */
+.page-section a {
+    color: #007185;
+    text-decoration: none;
+}
+
+.page-section a:hover {
+    text-decoration: underline;
+}
+
+/* Contact form */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form label {
+    font-weight: bold;
+    color: #333;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.contact-form button {
+    background-color: #ff6a00;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #e65c00;
+}
+
+.toast {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: 9999;
+}
+
+.toast.show {
+    top: 20px;
+    opacity: 1;
+}
+.blog-title {
+    cursor: pointer;
+    color: #007185;
+}
+
+.blog-title:hover {
+    text-decoration: underline;
+}
+
+.blog-content {
+    display: none;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+    color: #555;
+}

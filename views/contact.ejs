@@ -1,0 +1,71 @@
+<%- include('partials/header') %>
+
+<section class="page-section">
+    <h1>Contact Us</h1>
+    <p>We would love to hear from you!</p>
+
+    <form id="contactForm" action="/contact" method="POST" class="contact-form">
+        <label>Name:</label>
+        <input type="text" name="name" required>
+
+        <label>Email:</label>
+        <input type="email" name="email" required>
+
+        <label>Message:</label>
+        <textarea name="message" rows="5" required></textarea>
+
+        <button type="submit">Send Message</button>
+    </form>
+</section>
+
+<!-- Toast Notification -->
+<div id="toast" class="toast">✅ Your message has been sent successfully!</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("contactForm");
+    const toast = document.getElementById("toast");
+
+    form.addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        // Collect form data
+        const formData = {
+            name: form.querySelector('input[name="name"]').value,
+            email: form.querySelector('input[name="email"]').value,
+            message: form.querySelector('textarea[name="message"]').value
+        };
+
+        try {
+            // Send the data to your backend
+            const response = await fetch("/contact", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            // Check if the response was successful
+            if (response.ok) {
+                toast.classList.add("show");
+                
+                // Hide after 3 seconds and reset the form
+                setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 3000);
+                form.reset();
+            } else {
+                const errorText = await response.text();
+                console.error("Server error:", errorText);
+                alert("An error occurred while sending your message. Please try again.");
+            }
+        } catch (error) {
+            console.error("Network error:", error);
+            alert("Could not connect to the server. Please check your internet connection.");
+        }
+    });
+});
+</script>
+
+ <%- include('partials/footer') %>
