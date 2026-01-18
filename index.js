@@ -10,7 +10,7 @@ import dotenv from 'dotenv';
 import { Resend } from "resend";
 
 const app=express();
-const port=3000;
+const port = process.env.PORT || 3000; // Vercel provides process.env.PORT
 const saltRounds = 10;
 dotenv.config();
 
@@ -33,14 +33,24 @@ app.use(session(
 app.use(passport.initialize());
 app.use(passport.session());
 
-const db = new pg.Client({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database:process.env.DB_NAME ,
-  password: process.env.DB_PASS,
-  port: process.env.PORT,
+// const db = new pg.Client({
+//   user: process.env.DB_USER,
+//   host: process.env.DB_HOST,
+//   database:process.env.DB_NAME ,
+//   password: process.env.DB_PASS,
+//   port: process.env.PORT,
+// });
+// db.connect();
+
+const { Pool } = require("pg");
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }, // Required for cloud DB like Supabase
 });
-db.connect();
+
+module.exports = pool; // if you need to export for queries
+
 
 //global middleware
 app.use((req, res, next) => {
